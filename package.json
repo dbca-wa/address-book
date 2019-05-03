@@ -1,0 +1,46 @@
+{
+  "name": "address-book",
+  "version": "0.3.0",
+  "private": true,
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "inspect": "vue-cli-service inspect",
+    "lint": "vue-cli-service lint"
+  },
+  "dependencies": {
+    "debounce": "^1.2.0",
+    "es6-promise": "^4.2.6",
+    "fetch-ie8": "^1.5.0",
+    "foundation-icons": "^1.0.1",
+    "foundation-sites": "^6.5.3",
+    "js-search": "^1.4.2",
+    "leaflet": "^1.4.0",
+    "mdn-polyfills": "^5.16.0",
+    "query-string": "^6.5.0",
+    "vue": "^2.6.10",
+    "vue-paginate": "git+https://github.com/marcovdb/vue-paginate.git",
+    "vue-router": "^3.0.6",
+    "vue2-leaflet": "^1.2.3",
+    "vuex": "^3.1.0",
+    "vuex-persistedstate": "git+https://github.com/scottp-dpaw/vuex-persistedstate.git"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "^3.7.0",
+    "@vue/cli-plugin-eslint": "^3.7.0",
+    "@vue/cli-service": "^3.7.0",
+    "node-sass": "^4.12.0",
+    "sass-loader": "^7.1.0",
+    "vue-template-compiler": "^2.6.10"
+  },
+  "postcss": {
+    "plugins": {
+      "autoprefixer": {}
+    }
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 8"
+  ]
+}
