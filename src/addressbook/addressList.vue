@@ -62,10 +62,15 @@
                 </ul>
             </div>
             <div class="cell auto show-for-large details">
-                <ul class="no-bullet shrink">
+                <ul class="no-bullet shrink" v-if="!hideOrg">
                     <li v-if="user.location"><b>Loc:</b>&nbsp;<a v-on:click="$emit('showModal', 'location', user.location.id)">{{ user.location.name }}</a></li>
                     <li v-if="user.org_unit"><b>Unit:</b>&nbsp;<a v-on:click="$emit('showModal', 'orgUnit', user.org_unit.id)">{{ user.org_unit.name }}<span v-if="user.org_unit.acronym">&nbsp;({{ user.org_unit.acronym }})</span></a></li>
                     <li v-if="user.group_unit"><b>Grp:</b>&nbsp;<a v-on:click="$emit('showModal', 'orgUnit', user.group_unit.id)">{{ user.group_unit.name }}<span v-if="user.group_unit.acronym">&nbsp;({{ user.group_unit.acronym }})</span></a></li>
+                </ul>
+                <ul class="no-bullet shink" v-else>
+                    <li v-if="user.location"><b>Loc:</b>&nbsp;<a v-on:click="$emit('showModal', 'location', user.location.id)">{{ user.location.name }}</a></li>
+                    <li v-if="user.org_unit"><b>Unit:</b>&nbsp;{{ user.org_unit.name }}<span v-if="user.org_unit.acronym">&nbsp;({{ user.org_unit.acronym }})</span></li>
+                    <li v-if="user.group_unit"><b>Grp:</b>&nbsp;{{ user.group_unit.name }}<span v-if="user.group_unit.acronym">&nbsp;({{ user.group_unit.acronym }})</span></li>
                 </ul>
             </div>
             <div class="cell shrink show-for-small-only side-controls"> 
@@ -116,7 +121,7 @@
                         {{ modalLocation.address }}<br/>
                     </div>
                 </div>
-                <div class="grid-x grid-margin-x" v-if="modal.org_unit_chain">
+                <div class="grid-x grid-margin-x" v-if="modal.org_unit_chain && !hideOrg">
                     <div class="cell large-2 large-text-right"><b>Org. units:</b></div>
                     <div class="cell auto">
                         <ul>
@@ -255,6 +260,7 @@ export default {
         addressFilters: Object,
         modal: Object,
         itAssetsUrl: String,
+        hideOrg: Boolean,
     },
     computed: {
         // used to render the list of users

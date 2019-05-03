@@ -27,10 +27,10 @@ module.exports = {
         config.output.libraryExport = 'default';
         
         // if production, remove the cache-hint hash from file names
-        if (process.env.NODE_ENV === 'production') {
-            config.output.filename = 'js/[name].js';
-            config.output.chunkFilename = 'js/[name].js';
-        }
+        //if (process.env.NODE_ENV === 'production') {
+        //    config.output.filename = 'js/[name].js';
+        //    config.output.chunkFilename = 'js/[name].js';
+        //}
 
     },
     chainWebpack: function (config) {

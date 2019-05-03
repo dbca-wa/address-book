@@ -4,13 +4,13 @@
     <div class="grid-container">
         <div class="grid-x grid-margin-x align-middle align-center small-margin-collapse tab-fix">
             <div class="cell auto tabs-title"><a v-bind:aria-selected="currentTab == 'addressList'" v-on:click="changeTab('addressList')">Address list</a></div>
-            <div class="cell auto tabs-title"><a v-bind:aria-selected="currentTab == 'organisation'" v-on:click="changeTab('organisation')">Organisation</a></div>
+            <div class="cell auto tabs-title" v-if="!hideOrg"><a v-bind:aria-selected="currentTab == 'organisation'" v-on:click="changeTab('organisation')">Organisation</a></div>
             <div class="cell auto tabs-title"><a v-bind:aria-selected="currentTab == 'locations'" v-on:click="changeTab('locations')">Locations</a></div>
         </div>
     </div>
 
-    <addressList ref="addressList" v-bind:addressFilters="addressFilters" v-bind:itAssetsUrl="itAssetsUrl" v-bind:modal="modals.user" v-on:showModal="showModal" v-on:clearFilters="clearFilters" v-show="currentTab == 'addressList'"/>
-    <organisation ref="organisation" v-on:updateFilter="updateFilter" v-bind:modal="modals.orgUnit" v-on:showModal="showModal" v-show="currentTab == 'organisation'" />
+    <addressList ref="addressList" v-bind:addressFilters="addressFilters" v-bind:itAssetsUrl="itAssetsUrl" v-bind:modal="modals.user" v-bind:hideOrg="hideOrg" v-on:showModal="showModal" v-on:clearFilters="clearFilters" v-show="currentTab == 'addressList'"/>
+    <organisation ref="organisation" v-on:updateFilter="updateFilter" v-bind:modal="modals.orgUnit" v-on:showModal="showModal" v-show="currentTab == 'organisation'" v-if="!hideOrg"/>
     <locations ref="locations" v-on:updateFilter="updateFilter" v-bind:itAssetsUrl="itAssetsUrl" v-bind:modal="modals.location" v-on:showModal="showModal" v-bind:kmiUrl="kmiUrl" v-bind:visible="currentTab == 'locations'" />
 </div>
 
@@ -84,6 +84,7 @@ export default {
     props: {
         itAssetsUrl: String,
         kmiUrl: String,
+        hideOrg: Boolean,
     },
     methods: {
         update: function () {
