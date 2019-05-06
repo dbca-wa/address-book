@@ -129,21 +129,20 @@
                         </ul>
                     </div>
                 </div>
-                <!-- FIXME: uncomment once management hierachy is synced -->
-                <!--div class="grid-x grid-margin-x" v-if="modalManager">
+                <div class="grid-x grid-margin-x" v-if="modalManager && !hideOrg">
                     <div class="cell large-2 large-text-right"><b>Manager:</b></div>
                     <div class="cell auto">
                         <a v-on:click="$emit('showModal', 'user', modalManager.id)">{{ modalManager.name }}</a> - <i>{{ modalManager.title }}</i>
                     </div>
                 </div>
-                <div class="grid-x grid-margin-x" v-if="modal.children.length">
+                <div class="grid-x grid-margin-x" v-if="modal.children.length && !hideOrg">
                     <div class="cell large-2 large-text-right"><b>Reports:</b></div>
                     <div class="cell auto">
                         <ul>
-                            <li v-for="user_id in modal.children" v-bind:key="user_id"><a v-on:click="$emit('showModal', 'user', user_id)">{{ $store.getters.user(user_id).name }}</a> - <i>{{ $store.getters.user(user_id).title }}</i></li>
+                            <li v-for="user_id in modal.children" v-bind:key="user_id" v-if="$store.getters.user(user_id)"><a v-on:click="$emit('showModal', 'user', user_id)">{{ $store.getters.user(user_id).name }}</a> - <i>{{ $store.getters.user(user_id).title }}</i></li>
                         </ul>
                     </div>
-                </div-->
+                </div>
 
             </div>
 
