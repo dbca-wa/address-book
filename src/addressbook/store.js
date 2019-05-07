@@ -58,7 +58,9 @@ const store = new Vuex.Store({
                         locationsOrder: [],
                         orgTree: [],
                     };
-            } catch (err) {}
+            } catch (err) {
+                console.log('getState failed');
+            }
 
             var userMap = result.usersOrder ? result.usersOrder.map(function (el) {
                 return [el.id, el];

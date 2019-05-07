@@ -11,7 +11,7 @@
                     </l-marker>
                 </l-map>
             </div>
-            <img v-bind:src="`${itAssetsUrl}${mobileLegend}`"/>
+            <img v-bind:src="`${baseUrl}${mobileLegend}`"/>
         </div>
         <div class="reveal-overlay show" v-on:click="$emit('showModal', 'location', null)" v-if="modal">
             <div class="small reveal" v-on:click.stop tabindex="-1">
@@ -89,7 +89,7 @@ export default {
             zoom: 5,
             center: L.latLng(-24.966, 123.750),
             icon: new L.Icon({
-                iconUrl: `${this.itAssetsUrl}${iconUrl}`,
+                iconUrl: `${this.baseUrl}${iconUrl}`,
                 iconSize: [32, 32],
                 iconAnchor: [16, 32],
                 popupAnchor: [0, -20],
@@ -100,7 +100,7 @@ export default {
         };
     },
     props: {
-        itAssetsUrl: String,
+        baseUrl: String,
         kmiUrl: String,
         visible: Boolean,
         modal: Object,

@@ -15,8 +15,9 @@ import main from './main.vue';
 var addressBookApp = function (target, args) {
     var options = {
         props: {
-            itAssetsUrl: args.itAssetsUrl, 
-            kmiUrl: args.kmiUrl,
+            baseUrl: args.baseUrl ? args.baseUrl : '',
+            itAssetsUrl: args.itAssetsUrl ? args.itAssetsUrl : '', 
+            kmiUrl: args.kmiUrl ? args.kmiUrl : '',
             hideOrg: args.hideOrg == 'true',
         }
     };

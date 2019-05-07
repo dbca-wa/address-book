@@ -9,9 +9,9 @@
         </div>
     </div>
 
-    <addressList ref="addressList" v-bind:addressFilters="addressFilters" v-bind:itAssetsUrl="itAssetsUrl" v-bind:modal="modals.user" v-bind:hideOrg="hideOrg" v-on:showModal="showModal" v-on:clearFilters="clearFilters" v-show="currentTab == 'addressList'"/>
+    <addressList ref="addressList" v-bind:addressFilters="addressFilters" v-bind:baseUrl="baseUrl" v-bind:modal="modals.user" v-bind:hideOrg="hideOrg" v-on:showModal="showModal" v-on:clearFilters="clearFilters" v-show="currentTab == 'addressList'"/>
     <organisation ref="organisation" v-on:updateFilter="updateFilter" v-bind:modal="modals.orgUnit" v-on:showModal="showModal" v-show="currentTab == 'organisation'" v-if="!hideOrg"/>
-    <locations ref="locations" v-on:updateFilter="updateFilter" v-bind:itAssetsUrl="itAssetsUrl" v-bind:modal="modals.location" v-on:showModal="showModal" v-bind:kmiUrl="kmiUrl" v-bind:visible="currentTab == 'locations'" />
+    <locations ref="locations" v-on:updateFilter="updateFilter" v-bind:baseUrl="baseUrl" v-bind:modal="modals.location" v-on:showModal="showModal" v-bind:kmiUrl="kmiUrl" v-bind:visible="currentTab == 'locations'" />
 </div>
 
 </template>
@@ -82,6 +82,7 @@ export default {
         locations,
     },
     props: {
+        baseUrl: String,
         itAssetsUrl: String,
         kmiUrl: String,
         hideOrg: Boolean,

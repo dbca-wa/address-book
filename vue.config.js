@@ -27,10 +27,10 @@ module.exports = {
         config.output.libraryExport = 'default';
         
         // if production, remove the cache-hint hash from file names
-        //if (process.env.NODE_ENV === 'production') {
-        //    config.output.filename = 'js/[name].js';
-        //    config.output.chunkFilename = 'js/[name].js';
-        //}
+        if (process.env.NODE_ENV === 'production') {
+            config.output.filename = 'js/[name].js';
+            config.output.chunkFilename = 'js/[name].js';
+        }
 
     },
     chainWebpack: function (config) {
@@ -42,7 +42,10 @@ module.exports = {
         config.module.rule('svg').use('file-loader').options({
             name: 'img/[name].[ext]'
         });
-    
+        config.module.rule('fonts').use('url-loader').options({
+            name: 'fonts/[name].[ext]'
+        });
+
         if (process.env.NODE_ENV != 'production') {
             // in dev mode, copy over the fake index.html page
             config.plugin('copy').tap(function (args) {
