@@ -1,4 +1,5 @@
 //var webpack = require('webpack');
+var VERSION = process.env.npm_package_version;
 
 module.exports = {
     pages: {
@@ -14,8 +15,8 @@ module.exports = {
         sourceMap: false
     },
 
-    publicPath: '/static/',
-    outputDir: 'static',
+    publicPath: '/static/'+VERSION+'/',
+    outputDir: 'static/'+VERSION,
     assetsDir: undefined,
     productionSourceMap: undefined,
     parallel: undefined,
