@@ -27,29 +27,20 @@
             <div class="cell shrink">
                 <label>
                     Search:
-                    <input type="text" class="contact-search" placeholder="Name, title, location..." v-model="searchQuery" v-on:keyup="search"/> 
+                    <input type="text" class="contact-search" placeholder="Name, title, location..." v-model="searchQuery" v-on:keyup="search"/>
                 </label>
             </div>
         </div>
     </div>
 
-
     <paginate name="filterUsers" ref="paginator" tag="div" class="contact-list grid-container" v-bind:list="filteredUsers" v-bind:per="perPage">
-
         <div class="contact grid-x grid-padding-x align-middle align-center cell" v-if="paginated('filterUsers').length == 0">
             <img v-if="usersList.length == 0" v-bind:src="`${baseUrl}/${loadingImg}`"/>
             <span v-else>No users match your query. Try removing some filters.</span>
         </div>
-
         <div class="contact grid-x grid-padding-x align-middle" v-for="(user, i) in paginated('filterUsers')" v-bind:key="i">
-            <div class="cell medium-shrink small-2">
-                <a v-on:click="$emit('showModal', 'user', user.id)">
-                    <img class="float-left" style="width: 4rem;" v-bind:src="user.photo_url" />
-                </a>
-            </div>
             <div class="cell auto">
                 <ul class="no-bullet shrink">
-
                     <li><a v-on:click="$emit('showModal', 'user', user.id)"><b>{{ user.name }} <span v-if="user.preferred_name">({{ user.preferred_name }})</span></b></a></li>
                     <li><i style="font-size: 90%;">{{ user.title }}</i></li>
                 </ul>
@@ -73,23 +64,21 @@
                     <li v-if="user.group_unit"><b>Grp:</b>&nbsp;{{ user.group_unit.name }}<span v-if="user.group_unit.acronym">&nbsp;({{ user.group_unit.acronym }})</span></li>
                 </ul>
             </div>
-            <div class="cell shrink show-for-small-only side-controls"> 
+            <div class="cell shrink show-for-small-only side-controls">
                 <div class="button-group">
                     <a v-if="user.phone_landline" v-bind:href="`tel:${user.phone_landline}`" class="button hollow"><i class="fi-telephone"></i></a>
                     <a v-bind:href="`mailto:${ user.email }`" class="button hollow"><i class="fi-mail"></i></a>
                 </div>
             </div>
         </div>
-
-
     </paginate>
+
     <div class="grid-container">
         <div class="contact grid-x grid-padding-x">
             <div class="cell shrink">
                  <span v-if="$refs.paginator">Viewing {{ $refs.paginator.pageItemsCount }}</span>
             </div>
             <div class="cell auto">
-
             </div>
             <div class="cell shrink">
                 <paginate-links for="filterUsers" v-bind:classes="{'ul': 'pagination', '.active': 'current'}" v-bind:show-step-links="true" v-bind:limit="4" ></paginate-links>
@@ -170,7 +159,7 @@
             display: inline-block;
             margin: 0 0.5em;
         }
-        
+
         .contact-per-page {
             width: 6em;
         }
