@@ -15,7 +15,7 @@ module.exports = {
         sourceMap: false
     },
 
-    publicPath: '/static/'+VERSION+'/',
+    publicPath: '',
     outputDir: 'static/'+VERSION,
     assetsDir: undefined,
     productionSourceMap: undefined,
