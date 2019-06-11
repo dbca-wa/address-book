@@ -64,7 +64,7 @@
                     <li v-if="user.group_unit"><b>Grp:</b>&nbsp;{{ user.group_unit.name }}<span v-if="user.group_unit.acronym">&nbsp;({{ user.group_unit.acronym }})</span></li>
                 </ul>
             </div>
-            <div class="cell shrink show-for-small-only side-controls">
+            <div class="cell shrink show-for-small-only side-controls print-hide">
                 <div class="button-group">
                     <a v-if="user.phone_landline" v-bind:href="`tel:${user.phone_landline}`" class="button hollow"><i class="fi-telephone"></i></a>
                     <a v-bind:href="`mailto:${ user.email }`" class="button hollow"><i class="fi-mail"></i></a>
@@ -211,6 +211,17 @@
         font-weight: bold;
     }
 
+    @media print {
+        /* when printing, hide elements with this CSS class */
+        .print-hide {
+            display: none !important;
+        }
+
+        /* by default link hrefs will be injected into page, disable */
+        a[href]:after {
+            content: none !important;
+        }
+    }
 }
 
 </style>
