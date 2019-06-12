@@ -69,7 +69,7 @@ var fetchLocations = function (base_url, success, failure) {
                 coords: el.point ? L.latLng(el.point.coordinates[1], el.point.coordinates[0]) : null,
                 info_url: el.url,
                 bandwidth_url: el.bandwidth_url,
-            }
+            };
         });
         success(data);
     };
@@ -79,7 +79,21 @@ var fetchLocations = function (base_url, success, failure) {
 
 var fetchOrgTree = function (base_url, success, failure) {
     var formatter = function (raw_data) {
-        success(raw_data);
+        var annotate = function (el, idList) {
+            var filterIds = idList.concat([el.id]);
+            return {
+                id: el.id,
+                name: el.name,
+                filterIds: filterIds,
+                children: el.children.map(function (fl) {
+                    return annotate(fl, filterIds);
+                })
+            };
+        };
+        var data = raw_data.map(function (el) {
+            return annotate(el, []);
+        });
+        success(data);
     };
     fetchWrap('/api/v2/orgtree.json', base_url, formatter, failure);
 };

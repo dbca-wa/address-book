@@ -3,7 +3,7 @@
         <button class="button small hollow" v-on:click="$emit('showOrg', unit.id)">{{ unit.name }}</button>
         <button v-if="hasChildren" class="button small hollow" v-on:click="toggle"><i v-if="hasChildren" v-bind:class="{'fi-minus': open, 'fi-plus': !open}"></i></button>
         <ul v-if="hasChildren" v-show="open">
-            <orgUnit v-for="child in unit.children" v-on:showOrg="$emit('showOrg', $event)" v-bind:key="child.id" v-bind:unit="child" />
+            <orgUnit v-for="child in filteredChildren" v-on:showOrg="$emit('showOrg', $event)" v-bind:key="child.id" v-bind:unit="child" v-bind:filterIds="filterIds" />
         </ul>
     </li>
 </template>
@@ -36,10 +36,27 @@ export default {
     },
     props: {
         unit: Object,
+        filterIds: Array,
     },
     computed: {
+        filteredChildren: function () {
+            var vm = this;
+            if (vm.filterIds !== null) {
+                return vm.unit.children.filter(function (el) {
+                    return vm.filterIds.includes(el.id);
+                });
+            }
+            return vm.unit.children;
+        },
         hasChildren: function () {
             return this.unit.children && this.unit.children.length;
+        }
+    },
+    watch: {
+        filterIds: function () {
+            if (this.filterIds) {
+                this.open = this.filterIds.includes(this.unit.id);
+            }
         }
     },
     methods: {

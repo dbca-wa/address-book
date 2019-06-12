@@ -5,7 +5,7 @@
         </h4>
         <div v-if="hasChildren">
             <ul class="orgList">
-                <orgUnit v-for="unit in unit.children" v-on:showOrg="$emit('showOrg', $event)" v-bind:key="unit.id" v-bind:unit="unit"></orgUnit>
+                <orgUnit v-for="unit in filteredChildren" v-on:showOrg="$emit('showOrg', $event)" v-bind:key="unit.id" v-bind:unit="unit" v-bind:filterIds="filterIds"></orgUnit>
             </ul>
         </div>
     </div>
@@ -32,8 +32,18 @@ export default {
     },
     props: {
         unit: Object,
+        filterIds: Array,
     },
     computed: {
+        filteredChildren: function () {
+            var vm = this;
+            if (vm.filterIds !== null) {
+                return vm.unit.children.filter(function (el) {
+                    return vm.filterIds.includes(el.id);
+                });
+            }
+            return vm.unit.children;
+        },
         hasChildren: function () {
             return this.unit.children && this.unit.children.length;
         }
