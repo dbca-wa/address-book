@@ -46,7 +46,7 @@
                         <div class="cell large-2 large-text-right"><b>Children:</b></div>
                         <div class="cell auto">
                             <ul>
-                                <li v-for="org_id in modal.children" v-bind:key="org_id"><a v-on:click="$emit('showModal', 'orgUnit', org_id)">{{ $store.getters.orgUnit(org_id).name }}<span v-if="$store.getters.orgUnit(org_id).acronym"> ({{ $store.getters.orgUnit(org_id).acronym }})</span></a></li>
+                                <li v-for="org_id in modal.children" v-if="$store.getters.orgUnit(org_id)" v-bind:key="org_id"><a v-on:click="$emit('showModal', 'orgUnit', org_id)">{{ $store.getters.orgUnit(org_id).name }}<span v-if="$store.getters.orgUnit(org_id).acronym"> ({{ $store.getters.orgUnit(org_id).acronym }})</span></a></li>
                             </ul>
                         </div>
                     </div>
