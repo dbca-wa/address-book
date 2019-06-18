@@ -84,6 +84,7 @@ var fetchOrgTree = function (base_url, success, failure) {
             return {
                 id: el.id,
                 name: el.name,
+                acronym: el.acronym,
                 filterIds: filterIds,
                 children: el.children.map(function (fl) {
                     return annotate(fl, filterIds);

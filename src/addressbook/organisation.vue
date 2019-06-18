@@ -106,6 +106,7 @@ export default {
                 results.push({
                     id: el.id,
                     name: el.name,
+                    acronym: el.acronym,
                     filterIds: el.filterIds,
                 });
                 el.children.map(spelunk);
