@@ -13,6 +13,7 @@ import main from './main.vue';
 
 
 var addressBookApp = function (target, args) {
+    args = args || {};
     var options = {
         props: {
             baseUrl: args.baseUrl ? args.baseUrl : '',

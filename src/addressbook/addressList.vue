@@ -35,7 +35,7 @@
 
     <paginate name="filterUsers" ref="paginator" tag="div" class="contact-list grid-container" v-bind:list="filteredUsers" v-bind:per="perPage">
         <div class="contact grid-x grid-padding-x align-middle align-center cell" v-if="paginated('filterUsers').length == 0">
-            <img v-if="usersList.length == 0" v-bind:src="`${baseUrl}${loadingImg}`"/>
+            <img v-if="usersList.length == 0" v-bind:src="`${baseUrl}/${loadingImg}`"/>
             <span v-else>No users match your query. Try removing some filters.</span>
         </div>
         <div class="contact grid-x grid-padding-x align-middle" v-for="(user, i) in paginated('filterUsers')" v-bind:key="i">
@@ -64,7 +64,7 @@
                     <li v-if="user.group_unit"><b>Grp:</b>&nbsp;{{ user.group_unit.name }}<span v-if="user.group_unit.acronym">&nbsp;({{ user.group_unit.acronym }})</span></li>
                 </ul>
             </div>
-            <div class="cell shrink show-for-small-only side-controls">
+            <div class="cell shrink show-for-small-only side-controls print-hide">
                 <div class="button-group">
                     <a v-if="user.phone_landline" v-bind:href="`tel:${user.phone_landline}`" class="button hollow"><i class="fi-telephone"></i></a>
                     <a v-bind:href="`mailto:${ user.email }`" class="button hollow"><i class="fi-mail"></i></a>
@@ -114,7 +114,7 @@
                     <div class="cell large-2 large-text-right"><b>Org. units:</b></div>
                     <div class="cell auto">
                         <ul>
-                            <li v-for="org_id in modal.org_unit_chain" v-bind:key="org_id" v-bind:class="{ orgSpecial: (org_id == modal.group_unit.id) || (org_id == modal.org_unit.id) }"><a v-on:click="$emit('showModal', 'orgUnit', org_id)">{{ $store.getters.orgUnit(org_id).name }}<span v-if="$store.getters.orgUnit(org_id).acronym"> ({{ $store.getters.orgUnit(org_id).acronym }})</span></a></li>
+                            <li v-for="org_id in modal.org_unit_chain" v-if="$store.getters.orgUnit(org_id)" v-bind:key="org_id" v-bind:class="{ orgSpecial: (org_id == modal.group_unit.id) || (org_id == modal.org_unit.id) }"><a v-on:click="$emit('showModal', 'orgUnit', org_id)">{{ $store.getters.orgUnit(org_id).name }}<span v-if="$store.getters.orgUnit(org_id).acronym"> ({{ $store.getters.orgUnit(org_id).acronym }})</span></a></li>
                         </ul>
                     </div>
                 </div>
@@ -211,6 +211,17 @@
         font-weight: bold;
     }
 
+    @media print {
+        /* when printing, hide elements with this CSS class */
+        .print-hide {
+            display: none !important;
+        }
+
+        /* by default link hrefs will be injected into page, disable */
+        a[href]:after {
+            content: none !important;
+        }
+    }
 }
 
 </style>
