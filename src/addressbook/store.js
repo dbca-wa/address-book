@@ -7,7 +7,6 @@ const store = new Vuex.Store({
     state: {
         users: new Map(),
         usersOrder: [],
-        orgTree: [],
         orgUnits: new Map(),
         orgUnitsOrder: [],
         locations: new Map(),
@@ -17,7 +16,7 @@ const store = new Vuex.Store({
         usersList: function (state) {
             return state.usersOrder;
         },
-        user: function (state) { 
+        user: function (state) {
             return function (id) {
                 return state.users.get(id);
             };
@@ -25,13 +24,10 @@ const store = new Vuex.Store({
         locationsList: function (state) {
             return state.locationsOrder;
         },
-        'location': function (state) { 
+        'location': function (state) {
             return function (id) {
                 return state.locations.get(id);
             };
-        },
-        orgTree: function (state) {
-            return state.orgTree;
         },
         orgUnitsList: function (state) {
             return state.orgUnitsOrder;
@@ -56,7 +52,6 @@ const store = new Vuex.Store({
                         usersOrder: [],
                         orgUnitsOrder: [],
                         locationsOrder: [],
-                        orgTree: [],
                     };
             } catch (err) {
                 console.log('getState failed');
@@ -90,9 +85,6 @@ const store = new Vuex.Store({
             state.locations = new Map(state.locationsOrder.map(function (el) {
                 return [el.id, el];
             }));
-        },
-        updateOrgTree: function (state, orgTree) {
-            state.orgTree = orgTree;
         },
         updateOrgUnits: function (state, orgUnitsList) {
             state.orgUnitsOrder = orgUnitsList;

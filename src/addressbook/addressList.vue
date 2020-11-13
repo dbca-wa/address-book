@@ -41,7 +41,7 @@
         <div class="contact grid-x grid-padding-x align-middle" v-for="(user, i) in paginated('filterUsers')" v-bind:key="i">
             <div class="cell auto">
                 <ul class="no-bullet shrink">
-                    <li><a v-on:click="$emit('showModal', 'user', user.id)"><b>{{ user.name }} <span v-if="user.preferred_name">({{ user.preferred_name }})</span></b></a></li>
+                    <li><b>{{ user.name }} <span v-if="user.preferred_name">({{ user.preferred_name }})</span></b></li>
                     <li><i style="font-size: 90%;">{{ user.title }}</i></li>
                 </ul>
             </div>
@@ -55,8 +55,8 @@
             <div class="cell auto show-for-large details">
                 <ul class="no-bullet shrink" v-if="!hideOrg">
                     <li v-if="user.location"><b>Loc:</b>&nbsp;<a v-on:click="$emit('showModal', 'location', user.location.id)">{{ user.location.name }}</a></li>
-                    <li v-if="user.org_unit"><b>Unit:</b>&nbsp;<a v-on:click="$emit('showModal', 'orgUnit', user.org_unit.id)">{{ user.org_unit.name }}<span v-if="user.org_unit.acronym">&nbsp;({{ user.org_unit.acronym }})</span></a></li>
-                    <li v-if="user.group_unit"><b>Grp:</b>&nbsp;<a v-on:click="$emit('showModal', 'orgUnit', user.group_unit.id)">{{ user.group_unit.name }}<span v-if="user.group_unit.acronym">&nbsp;({{ user.group_unit.acronym }})</span></a></li>
+                    <li v-if="user.org_unit"><b>Unit:</b> {{ user.org_unit.name }}<span v-if="user.org_unit.acronym"> ({{ user.org_unit.acronym }})</span></li>
+                    <li v-if="user.group_unit"><b>Grp:</b> {{ user.group_unit.name }}<span v-if="user.group_unit.acronym"> ({{ user.group_unit.acronym }})</span></li>
                 </ul>
                 <ul class="no-bullet shink" v-else>
                     <li v-if="user.location"><b>Loc:</b>&nbsp;<a v-on:click="$emit('showModal', 'location', user.location.id)">{{ user.location.name }}</a></li>
@@ -86,58 +86,6 @@
         </div>
     </div>
 
-    <div class="reveal-overlay show" v-on:click="$emit('showModal', 'user', null)" v-if="modal">
-        <div class="small reveal" v-on:click.stop tabindex="-1">
-            <h3>{{ modal.name }}</h3>
-            <p><i>{{ modal.title }}</i></p>
-            <div class="grid-container full detailList">
-                <div class="grid-x grid-margin-x" v-if="modal.email">
-                    <div class="cell large-2 large-text-right"><b>Email:</b></div>
-                    <div class="cell auto"><a v-bind:href="`mailto:${modal.email}`">{{ modal.email }}</a></div>
-                </div>
-                <div class="grid-x grid-margin-x" v-if="modal.phone_landline">
-                    <div class="cell large-2 large-text-right"><b>Phone:</b></div>
-                    <div class="cell auto"><a v-bind:href="`tel:${modal.phone_landline}`">{{ modal.phone_landline }}</a><span v-if="modal.phone_extension">&nbsp;(VoIP ext. <a v-bind:href="`tel:${modal.phone_extension}`">{{ modal.phone_extension }}</a>)</span></div>
-                </div>
-                <div class="grid-x grid-margin-x" v-if="modal.phone_mobile">
-                    <div class="cell large-2 large-text-right"><b>Mobile:</b></div>
-                    <div class="cell auto"><a v-bind:href="`tel:${modal.phone_mobile}`">{{ modal.phone_mobile }}</a></div>
-                </div>
-                <div class="grid-x grid-margin-x" v-if="modalLocation">
-                    <div class="cell large-2 large-text-right"><b>Location:</b></div>
-                    <div class="cell auto">
-                        <a v-on:click="$emit('showModal', 'location', modalLocation.id)">{{ modalLocation.name }}</a><br/>
-                        {{ modalLocation.address }}<br/>
-                    </div>
-                </div>
-                <div class="grid-x grid-margin-x" v-if="modal.org_unit_chain && !hideOrg">
-                    <div class="cell large-2 large-text-right"><b>Org. units:</b></div>
-                    <div class="cell auto">
-                        <ul>
-                            <li v-for="org_id in modal.org_unit_chain" v-if="$store.getters.orgUnit(org_id)" v-bind:key="org_id" v-bind:class="{ orgSpecial: (org_id == modal.group_unit.id) || (org_id == modal.org_unit.id) }"><a v-on:click="$emit('showModal', 'orgUnit', org_id)">{{ $store.getters.orgUnit(org_id).name }}<span v-if="$store.getters.orgUnit(org_id).acronym"> ({{ $store.getters.orgUnit(org_id).acronym }})</span></a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="grid-x grid-margin-x" v-if="modalManager && !hideOrg">
-                    <div class="cell large-2 large-text-right"><b>Manager:</b></div>
-                    <div class="cell auto">
-                        <a v-on:click="$emit('showModal', 'user', modalManager.id)">{{ modalManager.name }}</a> - <i>{{ modalManager.title }}</i>
-                    </div>
-                </div>
-                <div class="grid-x grid-margin-x" v-if="modal.children.length && !hideOrg">
-                    <div class="cell large-2 large-text-right"><b>Reports:</b></div>
-                    <div class="cell auto">
-                        <ul>
-                            <li v-for="user_id in modal.children" v-bind:key="user_id" v-if="$store.getters.user(user_id)"><a v-on:click="$emit('showModal', 'user', user_id)">{{ $store.getters.user(user_id).name }}</a> - <i>{{ $store.getters.user(user_id).title }}</i></li>
-                        </ul>
-                    </div>
-                </div>
-
-            </div>
-
-            <button class="close-button" type="button" v-on:click="$emit('showModal', 'user', null)"><span aria-hidden="true">×</span></button>
-        </div>
-    </div>
 </div>
 </template>
 <style lang="scss">
@@ -273,9 +221,6 @@ export default {
         ]),
         modalLocation: function () {
             return this.modal.location ? this.$store.getters.location(this.modal.location.id) : null;
-        },
-        modalManager: function () {
-            return this.$store.getters.user(this.modal.parent);
         },
     },
     methods: {
