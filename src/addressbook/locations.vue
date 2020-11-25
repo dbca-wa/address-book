@@ -6,9 +6,11 @@
                 <l-map ref="map" v-bind:zoom="zoom" v-bind:center="center">
                     <l-tile-layer v-bind:url="basemapUrl"/>
                     <l-tile-layer v-bind:url="mobileUrl" v-bind:opacity="0.4"/>
-                    <l-marker v-for="location in mapLocations" v-bind:key="location.id" v-bind:icon="icon" v-bind:lat-lng="location.coords" v-on:click="$emit('showModal', 'location', location.id)">
-                        <l-tooltip v-bind:content="location.name"></l-tooltip>
-                    </l-marker>
+                    <v-marker-cluster :max-cluster-radius="10">
+                        <l-marker v-for="location in mapLocations" v-bind:key="location.id" v-bind:icon="icon" v-bind:lat-lng="location.coords" v-on:click="$emit('showModal', 'location', location.id)">
+                            <l-tooltip v-bind:content="location.name"></l-tooltip>
+                        </l-marker>
+                    </v-marker-cluster>
                 </l-map>
             </div>
             <img v-bind:src="`${baseUrl}/${mobileLegend}`"/>
@@ -50,7 +52,10 @@
         </div>
     </div>
 </template>
+
 <style lang="scss">
+@import "~leaflet.markercluster/dist/MarkerCluster.css";
+@import "~leaflet.markercluster/dist/MarkerCluster.Default.css";
 .f6inject {
     .mapbox {
         height: 70vh;
@@ -64,17 +69,14 @@
 }
 
 </style>
-<script>
 
+<script>
 import { mapGetters } from 'vuex';
 import { LMap, LTileLayer, LMarker, LTooltip } from 'vue2-leaflet';
 import L from 'leaflet';
-
-//import 'leaflet/dist/leaflet.css';
-
+import Vue2LeafletMarkerCluster from 'vue2-leaflet-markercluster';
 import mobileLegend from './assets/mobile_legend.png';
 import iconUrl from './assets/pin.svg';
-
 
 export default {
     name: 'locations',
@@ -83,6 +85,7 @@ export default {
         LTileLayer,
         LMarker,
         LTooltip,
+        'v-marker-cluster': Vue2LeafletMarkerCluster,
     },
     data: function () {
         return {
@@ -106,7 +109,7 @@ export default {
         modal: Object,
     },
     watch: {
-        // the map widget will only listen for changes in window size. 
+        // the map widget will only listen for changes in window size.
         // need to load in the widget's visibility as a property and simulate a window resize on change.
         visible: function (val, oldVal) {
             if (val) {

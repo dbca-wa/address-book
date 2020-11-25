@@ -17,9 +17,8 @@ var addressBookApp = function (target, args) {
     var options = {
         props: {
             baseUrl: args.baseUrl ? args.baseUrl : '',
-            itAssetsUrl: args.itAssetsUrl ? args.itAssetsUrl : '', 
+            itAssetsUrl: args.itAssetsUrl ? args.itAssetsUrl : '',
             kmiUrl: args.kmiUrl ? args.kmiUrl : '',
-            hideOrg: args.hideOrg == 'true',
         }
     };
 

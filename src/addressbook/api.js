@@ -6,7 +6,7 @@ import L from 'leaflet';
 
 var fetchWrap = function (path, base_url, success, failure) {
     fetch(`${base_url}${path}`, {
-        credentials: 'include',   
+        credentials: 'include',
     }).then(function (response) {
         if (!response.ok) {
             throw new Error(`Remote response was a ${response.status}`);
@@ -77,28 +77,6 @@ var fetchLocations = function (base_url, success, failure) {
     fetchWrap('/api/v2/location.json', base_url, formatter, failure);
 };
 
-var fetchOrgTree = function (base_url, success, failure) {
-    var formatter = function (raw_data) {
-        var annotate = function (el, idList) {
-            var filterIds = idList.concat([el.id]);
-            return {
-                id: el.id,
-                name: el.name,
-                acronym: el.acronym,
-                filterIds: filterIds,
-                children: el.children.map(function (fl) {
-                    return annotate(fl, filterIds);
-                })
-            };
-        };
-        var data = raw_data.map(function (el) {
-            return annotate(el, []);
-        });
-        success(data);
-    };
-    fetchWrap('/api/v2/orgtree.json', base_url, formatter, failure);
-};
-
 var fetchOrgUnits = function (base_url, success, failure) {
     var formatter = function (raw_data) {
         var data = raw_data.map(function (el) {
@@ -123,6 +101,5 @@ var fetchOrgUnits = function (base_url, success, failure) {
 export {
     fetchUsers,
     fetchLocations,
-    fetchOrgTree,
     fetchOrgUnits,
 }
