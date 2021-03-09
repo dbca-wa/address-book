@@ -5,7 +5,6 @@
             <div class="mapbox">
                 <l-map ref="map" v-bind:zoom="zoom" v-bind:center="center">
                     <l-tile-layer v-bind:url="basemapUrl"/>
-                    <l-tile-layer v-bind:url="mobileUrl" v-bind:opacity="0.4"/>
                     <v-marker-cluster :max-cluster-radius="10">
                         <l-marker v-for="location in mapLocations" v-bind:key="location.id" v-bind:icon="icon" v-bind:lat-lng="location.coords" v-on:click="$emit('showModal', 'location', location.id)">
                             <l-tooltip v-bind:content="location.name"></l-tooltip>
@@ -13,7 +12,6 @@
                     </v-marker-cluster>
                 </l-map>
             </div>
-            <img v-bind:src="`${baseUrl}/${mobileLegend}`"/>
         </div>
         <div class="reveal-overlay show" v-on:click="$emit('showModal', 'location', null)" v-if="modal">
             <div class="small reveal" v-on:click.stop tabindex="-1">
@@ -75,7 +73,6 @@ import { mapGetters } from 'vuex';
 import { LMap, LTileLayer, LMarker, LTooltip } from 'vue2-leaflet';
 import L from 'leaflet';
 import Vue2LeafletMarkerCluster from 'vue2-leaflet-markercluster';
-import mobileLegend from './assets/mobile_legend.png';
 import iconUrl from './assets/pin.svg';
 
 export default {
@@ -98,8 +95,6 @@ export default {
                 popupAnchor: [0, -20],
             }),
             basemapUrl: null,
-            mobileUrl: null,
-            mobileLegend,
         };
     },
     props: {
@@ -151,7 +146,6 @@ export default {
     },
     mounted: function () {
         this.basemapUrl = this.getTileUrl('public:mapbox-outdoors');
-        this.mobileUrl = this.getTileUrl('dpaw:telstra_gcm_4g_3g');
     }
 }
 </script>
