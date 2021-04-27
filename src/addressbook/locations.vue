@@ -33,17 +33,6 @@
                         <div class="cell large-2 large-text-right"><b>Fax:</b></div>
                         <div class="cell auto">{{ modal.fax }}</div>
                     </div>
-                    <div class="grid-x grid-margin-x" v-if="modal.email">
-                        <div class="cell large-2 large-text-right"><b>Email:</b></div>
-                        <div class="cell auto">{{ modal.email }}</div>
-                    </div>
-                    <div class="grid-x grid-margin-x" v-if="modal.info_url">
-                        <div class="cell large-2 large-text-right"><b>Website:</b></div>
-                        <div class="cell auto"><a v-bind:href="modal.info_url">Link</a></div>
-                    </div>
-                    <div class="grid-x grid-margin-x" v-if="modal.bandwidth_url">
-                        <iframe class="prtg cell auto" v-bind:src="modal.bandwidth_url"/>
-                    </div>
                 </div>
                 <button class="close-button" type="button" v-on:click="$emit('showModal', 'location', null)"><span aria-hidden="true">×</span></button>
             </div>
