@@ -183,7 +183,7 @@ import loadingImg from './assets/loading.gif';
 
 var searchDB = new Search('id');
 var searchKeys = [
-    'name', 'preferred_name', 'email', 'username', 'title', 'employee_id',
+    'name', 'preferred_name', 'email', 'title',
     'phone_landline', 'phone_extension', 'phone_mobile',
     'org_search', 'location_search',
 ];
