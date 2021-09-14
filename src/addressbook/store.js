@@ -7,8 +7,6 @@ const store = new Vuex.Store({
     state: {
         users: new Map(),
         usersOrder: [],
-        orgUnits: new Map(),
-        orgUnitsOrder: [],
         locations: new Map(),
         locationsOrder: [],
     },
@@ -29,14 +27,6 @@ const store = new Vuex.Store({
                 return state.locations.get(id);
             };
         },
-        orgUnitsList: function (state) {
-            return state.orgUnitsOrder;
-        },
-        orgUnit: function (state) {
-            return function (id) {
-                return state.orgUnits.get(id);
-            };
-        },
     },
     plugins: [createPersistedState({
         key: 'oim_addressbook',
@@ -50,7 +40,6 @@ const store = new Vuex.Store({
                     ? JSON.parse(value)
                     : {
                         usersOrder: [],
-                        orgUnitsOrder: [],
                         locationsOrder: [],
                     };
             } catch (err) {
@@ -61,10 +50,6 @@ const store = new Vuex.Store({
                 return [el.id, el];
             }) : [];
             result.users = new Map(userMap);
-            var orgUnitMap = result.orgUnitsOrder ? result.orgUnitsOrder.map(function (el) {
-                return [el.id, el];
-            }) : [];
-            result.orgUnits = new Map(orgUnitMap);
             var locationMap = result.locationsOrder ? result.locationsOrder.map(function (el) {
                 return [el.id, el];
             }) : [];
@@ -83,12 +68,6 @@ const store = new Vuex.Store({
         updateLocations: function (state, locationsList) {
             state.locationsOrder = locationsList;
             state.locations = new Map(state.locationsOrder.map(function (el) {
-                return [el.id, el];
-            }));
-        },
-        updateOrgUnits: function (state, orgUnitsList) {
-            state.orgUnitsOrder = orgUnitsList;
-            state.orgUnits = new Map(state.orgUnitsOrder.map(function (el) {
                 return [el.id, el];
             }));
         },

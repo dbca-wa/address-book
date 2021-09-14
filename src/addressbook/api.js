@@ -18,6 +18,7 @@ var fetchWrap = function (path, base_url, success, failure) {
     });
 };
 
+
 var fetchUsers = function (base_url, success, failure) {
     var formatter = function (raw_data) {
         var data = raw_data.map(function (el) {
@@ -54,7 +55,7 @@ var fetchLocations = function (base_url, success, failure) {
                 address: el.address,
                 phone: el.phone,
                 fax: el.fax,
-                coords: el.point ? L.latLng(el.point.coordinates[1], el.point.coordinates[0]) : null,
+                coords: 'coordinates' in el.point ? L.latLng(el.point.coordinates[1], el.point.coordinates[0]) : null,
             };
         });
         success(data);
