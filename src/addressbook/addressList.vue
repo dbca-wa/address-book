@@ -177,7 +177,6 @@
 import { mapGetters } from 'vuex';
 import { Search } from 'js-search';
 import debounce from 'debounce';
-
 import loadingImg from './assets/loading.gif';
 
 

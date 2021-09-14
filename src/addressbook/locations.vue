@@ -20,7 +20,7 @@
                 <div class="grid-container full detailList">
                     <div class="grid-x grid-margin-x" v-if="modal.address">
                         <div class="cell large-2 large-text-right"><b>Address:</b></div>
-                        <div class="cell auto" v-if="modal.coords"><a target="_blank" v-bind:href="`https://www.google.com/maps/search/?api=1&query=${modal.coords.lat},${modal.coords.lng}`">{{ modal.address }}</a></div>
+                        <div class="cell auto" v-if="modal.coords"><a target="_blank" v-bind:href="`https://duckduckgo.com/?iaxm=maps&q=${modal.coords.lat},${modal.coords.lng}`">{{ modal.address }}</a></div>
                         <div class="cell auto" v-else>
                             {{ modal.address }}
                         </div>

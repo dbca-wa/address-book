@@ -68,7 +68,6 @@ export default {
             },
             modals: {
                 user: null,
-                orgUnit: null,
                 'location': null,
             },
         };
@@ -121,9 +120,6 @@ export default {
                 case 'user':
                     this.showUser(src_id);
                     break;
-                case 'orgUnit':
-                    this.showOrgUnit(src_id);
-                    break;
                 case 'location':
                     this.showLocation(src_id);
                     break;
@@ -134,13 +130,11 @@ export default {
         showUser: function (user_id) {
             this.currentTab = 'addressList';
             this.modals['user'] = this.$store.getters.user(user_id);
-            this.modals['orgUnit'] = null;
             this.modals['location'] = null;
         },
         showLocation: function (location_id) {
             this.currentTab = 'locations';
             this.modals['user'] = null;
-            this.modals['orgUnit'] = null;
             this.modals['location'] = this.$store.getters.location(location_id);
         },
     },
