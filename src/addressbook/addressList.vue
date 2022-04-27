@@ -41,14 +41,14 @@
         <div class="contact grid-x grid-padding-x align-middle" v-for="(user, i) in paginated('filterUsers')" v-bind:key="i">
             <div class="cell auto">
                 <ul class="no-bullet shrink">
-                    <li><b>{{ user.name }} <span v-if="user.preferred_name">({{ user.preferred_name }})</span></b></li>
-                    <li><i style="font-size: 90%;">{{ user.title }}</i></li>
+                    <li><b>{{ user.name }}</b></li>
+                    <li><i>{{ user.title }}</i></li>
                 </ul>
             </div>
             <div class="cell auto show-for-medium details">
                 <ul class="no-bullet shrink">
                     <li><a v-bind:href="`mailto:${ user.email }`">{{ user.email }}</a></li>
-                    <li v-if="user.phone_landline"><b>Ph:</b>&nbsp;<a v-bind:href="`tel:${user.phone_landline}`">{{ user.phone_landline }}</a><span v-if="user.phone_extension">&nbsp;(VoIP ext. <a v-bind:href="`tel:${user.phone_extension}`">{{ user.phone_extension }}</a>)</span></li>
+                    <li v-if="user.phone_landline"><b>Ph:</b>&nbsp;<a v-bind:href="`tel:${user.phone_landline}`">{{ user.phone_landline }}</a></li>
                     <li v-if="user.phone_mobile"><b>Mob:</b>&nbsp;<a v-bind:href="`tel:${user.phone_mobile}`">{{ user.phone_mobile }}</a></li>
                 </ul>
             </div>
