@@ -34,6 +34,8 @@ var fetchUsers = function (base_url, success, failure) {
                 location: el.location,
                 org_unit: el.org_unit,
                 group_unit: el.group_unit,
+                division: el.division,
+                unit: el.unit,
                 org_search: el.org_unit ? `${el.org_unit.name} ${el.org_unit.acronym} ${el.group_unit.name} ${el.group_unit.acronym}` : null,
                 location_search: el.location ? el.location.name : null,
                 visible: true,
