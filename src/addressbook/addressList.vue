@@ -48,20 +48,15 @@
             <div class="cell auto show-for-medium details">
                 <ul class="no-bullet shrink">
                     <li><a v-bind:href="`mailto:${ user.email }`">{{ user.email }}</a></li>
-                    <li v-if="user.phone_landline"><b>Ph:</b>&nbsp;<a v-bind:href="`tel:${user.phone_landline}`">{{ user.phone_landline }}</a></li>
-                    <li v-if="user.phone_mobile"><b>Mob:</b>&nbsp;<a v-bind:href="`tel:${user.phone_mobile}`">{{ user.phone_mobile }}</a></li>
+                    <li v-if="user.phone_landline"><b>Ph:</b> <a v-bind:href="`tel:${user.phone_landline}`">{{ user.phone_landline }}</a></li>
+                    <li v-if="user.phone_mobile"><b>Mob:</b> <a v-bind:href="`tel:${user.phone_mobile}`">{{ user.phone_mobile }}</a></li>
                 </ul>
             </div>
             <div class="cell auto show-for-large details">
-                <ul class="no-bullet shrink" v-if="!hideOrg">
-                    <li v-if="user.location"><b>Loc:</b>&nbsp;<a v-on:click="$emit('showModal', 'location', user.location.id)">{{ user.location.name }}</a></li>
-                    <li v-if="user.org_unit"><b>Unit:</b> {{ user.org_unit.name }}<span v-if="user.org_unit.acronym"> ({{ user.org_unit.acronym }})</span></li>
-                    <li v-if="user.group_unit"><b>Grp:</b> {{ user.group_unit.name }}<span v-if="user.group_unit.acronym"> ({{ user.group_unit.acronym }})</span></li>
-                </ul>
-                <ul class="no-bullet shink" v-else>
-                    <li v-if="user.location"><b>Loc:</b>&nbsp;<a v-on:click="$emit('showModal', 'location', user.location.id)">{{ user.location.name }}</a></li>
-                    <li v-if="user.org_unit"><b>Unit:</b>&nbsp;{{ user.org_unit.name }}<span v-if="user.org_unit.acronym">&nbsp;({{ user.org_unit.acronym }})</span></li>
-                    <li v-if="user.group_unit"><b>Grp:</b>&nbsp;{{ user.group_unit.name }}<span v-if="user.group_unit.acronym">&nbsp;({{ user.group_unit.acronym }})</span></li>
+                <ul class="no-bullet shink">
+                    <li v-if="user.location"><b>Loc:</b> <a v-on:click="$emit('showModal', 'location', user.location.id)">{{ user.location.name }}</a></li>
+                    <li v-if="user.unit"><b>Unit:</b> {{ user.unit }}</li>
+                    <li v-if="user.division"><b>Grp:</b> {{ user.division }}</li>
                 </ul>
             </div>
             <div class="cell shrink show-for-small-only side-controls print-hide">

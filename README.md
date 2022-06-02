@@ -2,26 +2,37 @@
 JS frontend for department address book.
 
 ## Project setup
+
+Use `npm` version v6.* to build & serve this project. `nvm` can assist, e.g.:
+
+```
+nvm install lts/carbon
+nvm use lts/carbon
+```
+
+Install project dependencies:
+
 ```
 npm install
 ```
 
-### Compiles and hot-reloads for development
+Compiles and hot-reloads for development:
 ```
 npm run serve
 ```
 
-### Compiles and minifies for production
+Compiles and minifies for production:
 ```
 npm run build
 ```
 
-### Lints and fixes files
+Lints and fixes files:
 ```
 npm run lint
 ```
 
-### Environment variables
+## Environment variables
+
 Vue-cli supports [auto-overriding .env files](https://cli.vuejs.org/guide/mode-and-env.html). Make a copy of the default env vars and override them locally for development.
 ```
 cp .env .env.development.local
